@@ -43,7 +43,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	log.Infof("initial seed file - %s", *initialSeedFile)
 	if initialSeedFile != nil && *initialSeedFile != "" {
 		if err = seeds.RunSeeds(*initialSeedFile); err != nil {
 			log.Fatal(err)
