@@ -13,6 +13,14 @@ const (
 	categoriesPath = "payments/categories"
 )
 
+// ListCategories godoc
+// @Summary      List Categories
+// @Description  List all categories
+// @Tags         categories
+// @Produce      json
+// @Success      200  {object}  models.Category
+// @Failure      500  {string}  string "error"
+// @Router       /payments/categories [get]
 func (api *API) ListCategories(c *gin.Context) {
 	categories, err := services.GetCategoryService().List()
 	if err != nil {

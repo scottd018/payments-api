@@ -6,7 +6,10 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	files "github.com/swaggo/files"
+	swagger "github.com/swaggo/gin-swagger"
 
+	_ "github.com/scottd018/payments-api/docs"
 	"github.com/scottd018/payments-api/services"
 )
 
@@ -75,6 +78,10 @@ func NewAPI() *API {
 	router.GET(pathWithID(paymentsPath), api.ReadPayment)
 	router.PUT(pathWithID(paymentsPath), api.UpdatePayment)
 	router.DELETE(pathWithID(paymentsPath), api.DeletePayment)
+
+	// documentation
+	router.GET(path("docs"), func(c *gin.Context) { c.Redirect(http.StatusFound, "docs/index.html") })
+	router.GET(path("docs/*any"), swagger.WrapHandler(files.Handler))
 
 	return api
 }
