@@ -1,0 +1,66 @@
+{
+    "frequencies": [
+        {
+            "name": "Daily"
+        },
+        {
+            "name": "Weekly"
+        },
+        {
+            "name": "Monthly"
+        },
+        {
+            "name": "Yearly"
+        },
+        {
+            "name": "Never"
+        },
+        {
+            "name": "Bi-Monthly"
+        },
+        {
+            "name": "Semi-Annually"
+        }
+    ],
+    "categories": [
+        {
+            "name": "Vehicle"
+        },
+        {
+            "name": "Credit Card Fees"
+        },
+        {
+            "name": "Pets"
+        },
+        {
+            "name": "Food"
+        },
+        {
+            "name": "Home"
+        },
+        {
+            "name": "Insurance"
+        },
+        {
+            "name": "Internet"
+        },
+        {
+            "name": "Other"
+        },
+        {
+            "name": "Phone"
+        },
+        {
+            "name": "Savings"
+        },
+        {
+            "name": "Taxes"
+        },
+        {
+            "name": "Television"
+        },
+        {
+            "name": "Utilities"
+        }
+    ]
+}

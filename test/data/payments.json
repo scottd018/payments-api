@@ -1,0 +1,11 @@
+{
+    "name": "test",
+    "amount": 11.12,
+    "due": "2011-11-11T00:00:00Z",
+    "automatic": false,
+    "source_account_id": 123456,
+    "destination_account_id": 123456,
+    "frequency_id": 1,
+    "category_id": 1,
+    "id": 123456
+}

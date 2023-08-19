@@ -1,0 +1,10 @@
+{
+    "name": "test-update",
+    "amount": 11.34,
+    "due": "2012-12-12T00:00:00Z",
+    "automatic": true,
+    "source_account_id": 123456,
+    "destination_account_id": 123456,
+    "frequency_id": 2,
+    "category_id": 2
+}
