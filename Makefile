@@ -23,19 +23,19 @@ docs:
 
 # payment children
 test.create.child.%:
-	@echo "creating $*" && curl -X POST -d @test/data/$*.json localhost:8080/api/v1/payments/$* | jq -r && echo
+	@echo "creating $*" && curl -X POST -d @test/data/$*.json localhost:8080/api/v1/$* | jq -r && echo
 
 test.list.child.%:
-	@echo "listing $*" && curl -X GET localhost:8080/api/v1/payments/$* | jq -r && echo
+	@echo "listing $*" && curl -X GET localhost:8080/api/v1/$* | jq -r && echo
 
 test.read.child.%:
-	@echo "reading $*" && curl -X GET localhost:8080/api/v1/payments/$*/123456 | jq -r && echo
+	@echo "reading $*" && curl -X GET localhost:8080/api/v1/$*/123456 | jq -r && echo
 
 test.update.child.%:
-	@echo "updating $*" && curl -X PUT -d @test/data/$*-update.json localhost:8080/api/v1/payments/$*/123456 | jq -r && echo
+	@echo "updating $*" && curl -X PUT -d @test/data/$*-update.json localhost:8080/api/v1/$*/123456 | jq -r && echo
 
 test.delete.child.%:
-	@echo "deleting $*" && curl -X DELETE localhost:8080/api/v1/payments/$*/123456 | jq -r && echo
+	@echo "deleting $*" && curl -X DELETE localhost:8080/api/v1/$*/123456 | jq -r && echo
 
 test.child.%: test.create.child.% \
 	test.list.child.% \

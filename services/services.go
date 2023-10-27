@@ -40,6 +40,21 @@ func GenericRead(db *gorm.DB, id int, model interface{}) error {
 	return nil
 }
 
+// GenericFindBy is a generic function to read a model by
+// which matches a field with a particular value.
+func GenericFindBy(db *gorm.DB, field string, value interface{}, model interface{}) (*gorm.DB, error) {
+	result := db.Where(map[string]interface{}{field: value}).First(model)
+	if result.Error != nil {
+		if result.RowsAffected == 0 {
+			return result, nil
+		}
+
+		return result, result.Error
+	}
+
+	return result, nil
+}
+
 // GenericDelete is a generic function to delete a model
 // when no special logic is required.
 func GenericDelete(db *gorm.DB, id int, model interface{}) error {
