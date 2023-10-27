@@ -10,9 +10,17 @@ import (
 )
 
 const (
-	accountTypesPath = "payments/account_types"
+	accountTypesPath = "account_types"
 )
 
+// ListAccountTypes godoc
+// @Summary      List Account Types
+// @Description  List all account types
+// @Tags         account_types
+// @Produce      json
+// @Success      200  {object}  models.AccountType
+// @Failure      500  {string}  string "error"
+// @Router       /account_types [get]
 func (api *API) ListAccountTypes(c *gin.Context) {
 	accountTypes, err := services.GetAccountTypeService().List()
 	if err != nil {
@@ -26,6 +34,14 @@ func (api *API) ListAccountTypes(c *gin.Context) {
 	})
 }
 
+// CreateAccount Type godoc
+// @Summary      Create Account Type
+// @Description  Create a new account type
+// @Tags         account_types
+// @Produce      json
+// @Success      200  {object}  models.AccountType
+// @Failure      500  {string}  string "error"
+// @Router       /account_types [post]
 func (api *API) CreateAccountType(c *gin.Context) {
 	var accountType models.AccountType
 
@@ -44,6 +60,15 @@ func (api *API) CreateAccountType(c *gin.Context) {
 	})
 }
 
+// ReadAccount Type godoc
+// @Summary      Get Account Type
+// @Description  Get an existing account type
+// @Tags         account_types
+// @Produce      json
+// @Param        id   path      int     true   "ID"
+// @Success      200  {object}  models.AccountType
+// @Failure      500  {string}  string "error"
+// @Router       /account_types/{id} [get]
 func (api *API) ReadAccountType(c *gin.Context) {
 	id, err := getID(c)
 	if err != nil {
@@ -64,6 +89,15 @@ func (api *API) ReadAccountType(c *gin.Context) {
 	})
 }
 
+// UpdateAccount Type godoc
+// @Summary      Update Account Type
+// @Description  Update an existing account type
+// @Tags         account_types
+// @Produce      json
+// @Param        id   path      int     true   "ID"
+// @Success      200  {object}  models.AccountType
+// @Failure      500  {string}  string "error"
+// @Router       /account_types/{id} [put]
 func (api *API) UpdateAccountType(c *gin.Context) {
 	id, err := getID(c)
 	if err != nil {
@@ -89,6 +123,15 @@ func (api *API) UpdateAccountType(c *gin.Context) {
 	})
 }
 
+// DeleteAccount Type godoc
+// @Summary      Delete Account Type
+// @Description  Delete an account type
+// @Tags         account_types
+// @Produce      json
+// @Param        id   path      int     true   "ID"
+// @Success      200  {object}  models.AccountType
+// @Failure      500  {string}  string "error"
+// @Router       /account_types/{id} [delete]
 func (api *API) DeleteAccountType(c *gin.Context) {
 	GenericDelete(services.GetAccountTypeService(), c)
 }

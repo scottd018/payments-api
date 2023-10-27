@@ -9,9 +9,17 @@ import (
 )
 
 const (
-	frequenciesPath = "payments/frequencies"
+	frequenciesPath = "frequencies"
 )
 
+// ListFrequencies godoc
+// @Summary      List Frequencies
+// @Description  List all frequencies
+// @Tags         frequencies
+// @Produce      json
+// @Success      200  {object}  models.Frequency
+// @Failure      500  {string}  string "error"
+// @Router       /frequencies [get]
 func (api *API) ListFrequencies(c *gin.Context) {
 	frequencies, err := services.GetFrequencyService().List()
 	if err != nil {
@@ -25,6 +33,15 @@ func (api *API) ListFrequencies(c *gin.Context) {
 	})
 }
 
+// ReadFrequency godoc
+// @Summary      Get Frequency
+// @Description  Get an existing frequency
+// @Tags         frequencies
+// @Produce      json
+// @Param        id   path      int     true   "ID"
+// @Success      200  {object}  models.Frequency
+// @Failure      500  {string}  string "error"
+// @Router       /frequencies/{id} [get]
 func (api *API) ReadFrequency(c *gin.Context) {
 	id, err := getID(c)
 	if err != nil {

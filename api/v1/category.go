@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	categoriesPath = "payments/categories"
+	categoriesPath = "categories"
 )
 
 // ListCategories godoc
@@ -20,7 +20,7 @@ const (
 // @Produce      json
 // @Success      200  {object}  models.Category
 // @Failure      500  {string}  string "error"
-// @Router       /payments/categories [get]
+// @Router       /categories [get]
 func (api *API) ListCategories(c *gin.Context) {
 	categories, err := services.GetCategoryService().List()
 	if err != nil {
@@ -34,6 +34,14 @@ func (api *API) ListCategories(c *gin.Context) {
 	})
 }
 
+// CreateCategory godoc
+// @Summary      Create Category
+// @Description  Create a new category
+// @Tags         categories
+// @Produce      json
+// @Success      200  {object}  models.Category
+// @Failure      500  {string}  string "error"
+// @Router       /categories [post]
 func (api *API) CreateCategory(c *gin.Context) {
 	var category models.Category
 
@@ -52,6 +60,15 @@ func (api *API) CreateCategory(c *gin.Context) {
 	})
 }
 
+// ReadCategory godoc
+// @Summary      Get Category
+// @Description  Get an existing category
+// @Tags         categories
+// @Produce      json
+// @Param        id   path      int     true   "ID"
+// @Success      200  {object}  models.Category
+// @Failure      500  {string}  string "error"
+// @Router       /categories/{id} [get]
 func (api *API) ReadCategory(c *gin.Context) {
 	id, err := getID(c)
 	if err != nil {
@@ -72,6 +89,15 @@ func (api *API) ReadCategory(c *gin.Context) {
 	})
 }
 
+// UpdateCategory godoc
+// @Summary      Update Category
+// @Description  Update an existing category
+// @Tags         categories
+// @Produce      json
+// @Param        id   path      int     true   "ID"
+// @Success      200  {object}  models.Category
+// @Failure      500  {string}  string "error"
+// @Router       /categories/{id} [put]
 func (api *API) UpdateCategory(c *gin.Context) {
 	id, err := getID(c)
 	if err != nil {
@@ -97,6 +123,15 @@ func (api *API) UpdateCategory(c *gin.Context) {
 	})
 }
 
+// DeleteCategory godoc
+// @Summary      Delete Category
+// @Description  Delete a category
+// @Tags         categories
+// @Produce      json
+// @Param        id   path      int     true   "ID"
+// @Success      200  {object}  models.Category
+// @Failure      500  {string}  string "error"
+// @Router       /categories/{id} [delete]
 func (api *API) DeleteCategory(c *gin.Context) {
 	GenericDelete(services.GetCategoryService(), c)
 }

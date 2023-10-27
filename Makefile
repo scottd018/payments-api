@@ -1,9 +1,21 @@
 VERSION ?= development
+API_VERSION ?= v1
 build:
 	docker build . -t payments-api:$(VERSION)
 
 run:
 	cd test && docker-compose up
+
+clean:
+	cd test && docker-compose down -v --rmi all --remove-orphans
+
+.PHONY: docs
+docs:
+	swag init \
+		--dir api/$(API_VERSION) \
+		--output api/$(API_VERSION)/docs \
+		--generalInfo api.go \
+		--parseDependencyLevel 3
 
 #
 # test harnesses

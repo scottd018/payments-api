@@ -10,9 +10,17 @@ import (
 )
 
 const (
-	sourceAccountsPath = "payments/source_accounts"
+	sourceAccountsPath = "source_accounts"
 )
 
+// ListCategories godoc
+// @Summary      List Source Accounts
+// @Description  List all source accounts
+// @Tags         source_accounts
+// @Produce      json
+// @Success      200  {object}  models.SourceAccount
+// @Failure      500  {string}  string "error"
+// @Router       /source_accounts [get]
 func (api *API) ListSourceAccounts(c *gin.Context) {
 	sourceAccounts, err := services.GetSourceAccountService().List()
 	if err != nil {
@@ -26,6 +34,14 @@ func (api *API) ListSourceAccounts(c *gin.Context) {
 	})
 }
 
+// CreateCategory godoc
+// @Summary      Create Source Account
+// @Description  Create a new source account
+// @Tags         source_accounts
+// @Produce      json
+// @Success      200  {object}  models.SourceAccount
+// @Failure      500  {string}  string "error"
+// @Router       /source_accounts [post]
 func (api *API) CreateSourceAccount(c *gin.Context) {
 	var sourceAccount models.SourceAccount
 
@@ -44,6 +60,15 @@ func (api *API) CreateSourceAccount(c *gin.Context) {
 	})
 }
 
+// ReadCategory godoc
+// @Summary      Get Source Account
+// @Description  Get an existing source account
+// @Tags         source_accounts
+// @Produce      json
+// @Param        id   path      int     true   "ID"
+// @Success      200  {object}  models.SourceAccount
+// @Failure      500  {string}  string "error"
+// @Router       /source_accounts/{id} [get]
 func (api *API) ReadSourceAccount(c *gin.Context) {
 	id, err := getID(c)
 	if err != nil {
@@ -64,6 +89,15 @@ func (api *API) ReadSourceAccount(c *gin.Context) {
 	})
 }
 
+// UpdateCategory godoc
+// @Summary      Update Source Account
+// @Description  Update an existing source account
+// @Tags         source_accounts
+// @Produce      json
+// @Param        id   path      int     true   "ID"
+// @Success      200  {object}  models.SourceAccount
+// @Failure      500  {string}  string "error"
+// @Router       /source_accounts/{id} [put]
 func (api *API) UpdateSourceAccount(c *gin.Context) {
 	id, err := getID(c)
 	if err != nil {
@@ -89,6 +123,15 @@ func (api *API) UpdateSourceAccount(c *gin.Context) {
 	})
 }
 
+// DeleteCategory godoc
+// @Summary      Delete Source Account
+// @Description  Delete a source account
+// @Tags         source_accounts
+// @Produce      json
+// @Param        id   path      int     true   "ID"
+// @Success      200  {object}  models.SourceAccount
+// @Failure      500  {string}  string "error"
+// @Router       /source_accounts/{id} [delete]
 func (api *API) DeleteSourceAccount(c *gin.Context) {
 	GenericDelete(services.GetSourceAccountService(), c)
 }

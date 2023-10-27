@@ -1,0 +1,656 @@
+basePath: /api/v1
+definitions:
+  models.AccountType:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Category:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.DestinationAccount:
+    properties:
+      account_type:
+        $ref: '#/definitions/models.AccountType'
+      account_type_id:
+        type: integer
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+      url:
+        type: string
+    type: object
+  models.Frequency:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Payment:
+    properties:
+      amount:
+        type: number
+      automatic:
+        type: boolean
+      category:
+        $ref: '#/definitions/models.Category'
+      category_id:
+        type: integer
+      created_at:
+        type: string
+      destination_account:
+        $ref: '#/definitions/models.DestinationAccount'
+      destination_account_id:
+        type: integer
+      due:
+        type: string
+      frequency:
+        $ref: '#/definitions/models.Frequency'
+      frequency_id:
+        type: integer
+      id:
+        type: integer
+      name:
+        type: string
+      source_account:
+        $ref: '#/definitions/models.SourceAccount'
+      source_account_id:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.SourceAccount:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+      url:
+        type: string
+    type: object
+externalDocs:
+  description: OpenAPI
+  url: https://swagger.io/resources/open-api/
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is the Payments API V1.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Payments API V1
+  version: "1"
+paths:
+  /account_types:
+    get:
+      description: List all account types
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AccountType'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: List Account Types
+      tags:
+      - account_types
+    post:
+      description: Create a new account type
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AccountType'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Create Account Type
+      tags:
+      - account_types
+  /account_types/{id}:
+    delete:
+      description: Delete an account type
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AccountType'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Delete Account Type
+      tags:
+      - account_types
+    get:
+      description: Get an existing account type
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AccountType'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Get Account Type
+      tags:
+      - account_types
+    put:
+      description: Update an existing account type
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AccountType'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Update Account Type
+      tags:
+      - account_types
+  /categories:
+    get:
+      description: List all categories
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Category'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: List Categories
+      tags:
+      - categories
+    post:
+      description: Create a new category
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Category'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Create Category
+      tags:
+      - categories
+  /categories/{id}:
+    delete:
+      description: Delete a category
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Category'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Delete Category
+      tags:
+      - categories
+    get:
+      description: Get an existing category
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Category'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Get Category
+      tags:
+      - categories
+    put:
+      description: Update an existing category
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Category'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Update Category
+      tags:
+      - categories
+  /destination_accounts:
+    get:
+      description: List all destination accounts
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DestinationAccount'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: List Categories
+      tags:
+      - destination_accounts
+    post:
+      description: Create a new destination account
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DestinationAccount'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Create Destination Account
+      tags:
+      - destination_accounts
+  /destination_accounts/{id}:
+    delete:
+      description: Delete a destination account
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DestinationAccount'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Delete Destination Account
+      tags:
+      - destination_accounts
+    get:
+      description: Get an existing destination account
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DestinationAccount'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Get Destination Account
+      tags:
+      - destination_accounts
+    put:
+      description: Update an existing destination account
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DestinationAccount'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Update Destination Account
+      tags:
+      - destination_accounts
+  /frequencies:
+    get:
+      description: List all frequencies
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Frequency'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: List Frequencies
+      tags:
+      - frequencies
+  /frequencies/{id}:
+    get:
+      description: Get an existing frequency
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Frequency'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Get Frequency
+      tags:
+      - frequencies
+  /payments:
+    get:
+      description: List all payments
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Payment'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: List Payments
+      tags:
+      - payments
+    post:
+      description: Create a new payment
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Payment'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Create Payment
+      tags:
+      - payments
+  /payments/{id}:
+    delete:
+      description: Delete a payment
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Payment'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Delete Payment
+      tags:
+      - payments
+    get:
+      description: Get an existing payment
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Payment'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Get Payment
+      tags:
+      - payments
+    put:
+      description: Update an existing payment
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Payment'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Update Payment
+      tags:
+      - payments
+  /source_accounts:
+    get:
+      description: List all source accounts
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SourceAccount'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: List Source Accounts
+      tags:
+      - source_accounts
+    post:
+      description: Create a new source account
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SourceAccount'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Create Source Account
+      tags:
+      - source_accounts
+  /source_accounts/{id}:
+    delete:
+      description: Delete a source account
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SourceAccount'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Delete Source Account
+      tags:
+      - source_accounts
+    get:
+      description: Get an existing source account
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SourceAccount'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Get Source Account
+      tags:
+      - source_accounts
+    put:
+      description: Update an existing source account
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SourceAccount'
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Update Source Account
+      tags:
+      - source_accounts
+swagger: "2.0"

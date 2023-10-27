@@ -1,5 +1,23 @@
 package v1
 
+// @title           Payments API V1
+// @version         1
+// @description     This is the Payments API V1.
+// @termsOfService  http://swagger.io/terms/
+
+// @contact.name   API Support
+// @contact.url    http://www.swagger.io/support
+// @contact.email  support@swagger.io
+
+// @license.name  Apache 2.0
+// @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host      localhost:8080
+// @BasePath  /api/v1
+
+// @externalDocs.description  OpenAPI
+// @externalDocs.url          https://swagger.io/resources/open-api/
+
 import (
 	"fmt"
 	"net/http"
@@ -9,7 +27,7 @@ import (
 	files "github.com/swaggo/files"
 	swagger "github.com/swaggo/gin-swagger"
 
-	_ "github.com/scottd018/payments-api/docs"
+	_ "github.com/scottd018/payments-api/api/v1/docs"
 	"github.com/scottd018/payments-api/services"
 )
 
@@ -17,12 +35,8 @@ const (
 	apiPath = "/api/v1"
 )
 
-func path(endpoint string) string {
-	return fmt.Sprintf("%s/%s", apiPath, endpoint)
-}
-
 func pathWithID(endpoint string) string {
-	return fmt.Sprintf("%s/:id", path(endpoint))
+	return fmt.Sprintf("%s/:id", endpoint)
 }
 
 type API struct {
@@ -40,48 +54,52 @@ func NewAPI() *API {
 		router,
 	}
 
+	v1 := router.Group(apiPath)
+
 	// frequency
-	router.GET(path(frequenciesPath), api.ListFrequencies)
-	router.GET(pathWithID(frequenciesPath), api.ReadFrequency)
+	v1.GET(frequenciesPath, api.ListFrequencies)
+	v1.GET(pathWithID(frequenciesPath), api.ReadFrequency)
 
 	// category
-	router.POST(path(categoriesPath), api.CreateCategory)
-	router.GET(path(categoriesPath), api.ListCategories)
-	router.GET(pathWithID(categoriesPath), api.ReadCategory)
-	router.PUT(pathWithID(categoriesPath), api.UpdateCategory)
-	router.DELETE(pathWithID(categoriesPath), api.DeleteCategory)
+	v1.POST(categoriesPath, api.CreateCategory)
+	v1.GET(categoriesPath, api.ListCategories)
+	v1.GET(pathWithID(categoriesPath), api.ReadCategory)
+	v1.PUT(pathWithID(categoriesPath), api.UpdateCategory)
+	v1.DELETE(pathWithID(categoriesPath), api.DeleteCategory)
 
 	// account type
-	router.POST(path(accountTypesPath), api.CreateAccountType)
-	router.GET(path(accountTypesPath), api.ListAccountTypes)
-	router.GET(pathWithID(accountTypesPath), api.ReadAccountType)
-	router.PUT(pathWithID(accountTypesPath), api.UpdateAccountType)
-	router.DELETE(pathWithID(accountTypesPath), api.DeleteAccountType)
+	v1.POST(accountTypesPath, api.CreateAccountType)
+	v1.GET(accountTypesPath, api.ListAccountTypes)
+	v1.GET(pathWithID(accountTypesPath), api.ReadAccountType)
+	v1.PUT(pathWithID(accountTypesPath), api.UpdateAccountType)
+	v1.DELETE(pathWithID(accountTypesPath), api.DeleteAccountType)
 
 	// source account
-	router.POST(path(sourceAccountsPath), api.CreateSourceAccount)
-	router.GET(path(sourceAccountsPath), api.ListSourceAccounts)
-	router.GET(pathWithID(sourceAccountsPath), api.ReadSourceAccount)
-	router.PUT(pathWithID(sourceAccountsPath), api.UpdateSourceAccount)
-	router.DELETE(pathWithID(sourceAccountsPath), api.DeleteSourceAccount)
+	v1.POST(sourceAccountsPath, api.CreateSourceAccount)
+	v1.GET(sourceAccountsPath, api.ListSourceAccounts)
+	v1.GET(pathWithID(sourceAccountsPath), api.ReadSourceAccount)
+	v1.PUT(pathWithID(sourceAccountsPath), api.UpdateSourceAccount)
+	v1.DELETE(pathWithID(sourceAccountsPath), api.DeleteSourceAccount)
 
 	// destination account
-	router.POST(path(destinationAccountsPath), api.CreateDestinationAccount)
-	router.GET(path(destinationAccountsPath), api.ListDestinationAccounts)
-	router.GET(pathWithID(destinationAccountsPath), api.ReadDestinationAccount)
-	router.PUT(pathWithID(destinationAccountsPath), api.UpdateDestinationAccount)
-	router.DELETE(pathWithID(destinationAccountsPath), api.DeleteDestinationAccount)
+	v1.POST(destinationAccountsPath, api.CreateDestinationAccount)
+	v1.GET(destinationAccountsPath, api.ListDestinationAccounts)
+	v1.GET(pathWithID(destinationAccountsPath), api.ReadDestinationAccount)
+	v1.PUT(pathWithID(destinationAccountsPath), api.UpdateDestinationAccount)
+	v1.DELETE(pathWithID(destinationAccountsPath), api.DeleteDestinationAccount)
 
 	// payment
-	router.POST(path(paymentsPath), api.CreatePayment)
-	router.GET(path(paymentsPath), api.ListPayments)
-	router.GET(pathWithID(paymentsPath), api.ReadPayment)
-	router.PUT(pathWithID(paymentsPath), api.UpdatePayment)
-	router.DELETE(pathWithID(paymentsPath), api.DeletePayment)
+	v1.POST(paymentsPath, api.CreatePayment)
+	v1.GET(paymentsPath, api.ListPayments)
+	v1.GET(pathWithID(paymentsPath), api.ReadPayment)
+	v1.PUT(pathWithID(paymentsPath), api.UpdatePayment)
+	v1.DELETE(pathWithID(paymentsPath), api.DeletePayment)
 
 	// documentation
-	router.GET(path("docs"), func(c *gin.Context) { c.Redirect(http.StatusFound, "docs/index.html") })
-	router.GET(path("docs/*any"), swagger.WrapHandler(files.Handler))
+	v1.GET("docs", func(c *gin.Context) { c.Redirect(http.StatusFound, "docs/index.html") })
+	v1.GET("docs/*any", swagger.WrapHandler(files.Handler))
+
+	v1.GET("/dashboard", func(c *gin.Context) { c.Redirect(http.StatusFound, "docs/index.html") })
 
 	return api
 }
