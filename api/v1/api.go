@@ -23,6 +23,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	files "github.com/swaggo/files"
 	swagger "github.com/swaggo/gin-swagger"
@@ -49,6 +50,15 @@ func (api *API) Serve(addr string) error {
 
 func NewAPI() *API {
 	router := gin.Default()
+	router.Use(
+		cors.New(
+			cors.Config{
+				AllowAllOrigins: true,
+				AllowHeaders:    []string{},
+				AllowMethods:    []string{"GET", "PUT", "POST", "DELETE"},
+			},
+		),
+	)
 
 	api := &API{
 		router,
